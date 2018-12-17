@@ -1,7 +1,9 @@
 //importar react
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
+import inimigo1 from '../img/ladrão.png';
+import inimigo2 from '../img/bolsonaro.png';
+import vida from '../img/vida.png';
 //declarar variaveis
 let animationFrameStatus;
 let jumpDuration = 1000;
@@ -22,14 +24,14 @@ class Game extends React.Component {
             bgOffset: 0,
             floorOffset: 0,
             itemOffset: 0,
-            lifes: 3,
+            lifes: 94,
             items: {
-                item1: {bottom: 20, left: 500, touched: false},
-                item2: {bottom: 20, left: 1000, touched: false},
-                item3: {bottom: 40, left: 1500, touched: false},
-                item4: {bottom: 20, left: 2000, touched: false},
-                item5: {bottom: 50, left: 2500, touched: false},
-                item6: {bottom: 30, left: 3000, touched: false}
+                item1: {bottom: 20, left: 500, touched: false, background: `url('${inimigo1}')`},
+                item2: {bottom: 20, left: 1000, touched: false, background: `url('${inimigo2}')`},
+                item3: {bottom: 40, left: 1500, touched: false, background: `url('${inimigo1}')`},
+                item4: {bottom: 20, left: 2000, touched: false, background: `url('${inimigo2}')`},
+                item5: {bottom: 50, left: 2500, touched: false, background: `url('${inimigo1}')`},
+                item6: {bottom: 30, left: 3000, touched: false, background: `url('${inimigo2}')`},
             }
         };
 
@@ -118,6 +120,7 @@ class Game extends React.Component {
             transform: 'translate3d(-' + this.state.itemOffset + 'px, 0, 0)', 
             bottom: thisItem.bottom,
             left: thisItem.left,
+            background: thisItem.background,
         }
         return ( 
             <div 
@@ -175,13 +178,11 @@ class Game extends React.Component {
                 <div className="c-bg" style={bgStyles}></div>
 
                 <div className="c-data">
-                    <p>Jogando: {this.state.isPlaying === true ? 'true' : 'false'}</p>
-                    <p>Distancia: {this.state.distance}</p>
-                    <p>Velocidade: {this.state.gameSpeed}</p>
-                    <h4 style={{margin: '5px 0'}}>Pontuação: {this.state.score}</h4>
-                    <p>BgOffset: {this.state.bgOffset}</p>
-                    <p>floorOffset: {this.state.floorOffset}</p>
-                    <p>Vida: {this.state.lifes}</p>
+                    <h4 style={{margin: '5px 0',color: 'white',fontSize: '4vh'}}>Pontuação: {this.state.score}</h4>
+                    <p>vidas: {this.state.lifes}</p>
+                    {this.state.lifes >= 94 ? <img src={vida} />: ""}
+                    {this.state.lifes >= 62 ? <img src={vida} />: ""}
+                    {this.state.lifes >= 30 ? <img src={vida} />: ""}
                 </div>
             </div>
         );
